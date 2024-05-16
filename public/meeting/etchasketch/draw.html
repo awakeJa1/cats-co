@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="controls">
+    <button id="clearButton">Limpar</button>
+    <div class="color-options">
+      <div class="color-option" data-color="#000000" style="background-color: #000000;"></div>
+      <div class="color-option" data-color="#ff0000" style="background-color: #ff0000;"></div>
+      <div class="color-option" data-color="#00ff00" style="background-color: #00ff00;"></div>
+      <div class="color-option" data-color="#0000ff" style="background-color: #0000ff;"></div>
+    </div>
+    <button id="toggleButton">Fechar</button>
+  </div>
+  <canvas id="canvas" width="500" height="500"></canvas>
+</div>
+
+<style> 
+  .container {
+    position: relative;
+    border: 1px solid black;
+  }
+  
+  #canvas {
+    cursor: crosshair;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+  }
+  
+  .color-options {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .color-option {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+  }
+  
+  #toggleButton {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  let isDrawing = false;
+  let currentColor = '#000000'; // Cor da caneta atual
+  const clearButton = document.getElementById('clearButton');
+  const colorOptions = document.querySelectorAll('.color-option');
+  const toggleButton = document.getElementById('toggleButton');
+  
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('mouseout', stopDrawing);
+  clearButton.addEventListener('click', reloadContainer);
+  colorOptions.forEach(option => option.addEventListener('click', changeColor));
+  toggleButton.addEventListener('click', toggleContainer);
+  
+  function startDrawing(e) {
+    isDrawing = true;
+    draw(e);
+  }
+  
+  function draw(e) {
+    if (!isDrawing) return;
+  
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+  
+    context.strokeStyle = currentColor;
+    context.lineTo(x, y);
+    context.stroke();
+  }
+  
+  function stopDrawing() {
+    isDrawing = false;
+  }
+  
+  function clearCanvas() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  
+  function changeColor(e) {
+    const selectedColor = e.target.getAttribute('data-color');
+    currentColor = selectedColor;
+  }
+  
+  function toggleContainer() {
+    const container = document.querySelector('.container');
+    container.classList.toggle('closed');
+    toggleButton.textContent = container.classList.contains('closed') ? 'Abrir' : 'Fechar';
+  }
+  
+  function reloadContainer() {
+    const container = document.querySelector('.container');
+    container.innerHTML = container.innerHTML;
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+    clearButton.addEventListener('click', reloadContainer);
+    colorOptions.forEach(option => option.addEventListener('click', changeColor));
+    toggleButton.addEventListener('click', toggleContainer);
+  }
+</script>

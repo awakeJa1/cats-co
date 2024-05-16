@@ -1,0 +1,54 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+    background-image: url("../imagens/opet.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  .chat-container {
+    background-color: rgb(32, 94, 57);
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .chat-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .chat-container li {
+    margin-bottom: 10px;
+  }
+  
+  .chat-form {
+    display: flex;
+    margin-top: 10px;
+  }
+  
+  .chat-form input {
+    flex-grow: 1;
+    padding: 5px;
+  }
+  
+  .chat-form button {
+    padding: 5px 10px;
+    margin-left: 10px;
+  }
+
+  .username {
+    font-weight: bold;
+  }
+
+  .command-container {
+    margin-top: 10px;
+    clear: both;
+  }
+  

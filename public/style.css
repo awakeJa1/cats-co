@@ -1,0 +1,100 @@
+header {
+    background-image: linear-gradient(to right, #ce9151, #d8af6e);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: relative;
+}
+
+body {
+    text-align: center;
+    vertical-align: top;
+    color: #000;
+    background-image: linear-gradient(to right, #ce9151, #d8af6e);
+    overflow-x: hidden; /* Impede a rolagem horizontal */
+}
+
+.div-centralizada {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.div-texto{
+    font-family: comic sans Ms;
+    font-size: large;
+    text-align: center;
+}
+
+.btn-brown {
+    background-color: #8B4513; /* Código hexadecimal da cor marrom */
+    border-color: #8B4513;
+    color: #fff; /* Cor do texto no botão */
+}
+
+.btn-light-brown {
+    background-color: #D2B48C; /* Código hexadecimal da cor marrom mais clara */
+    border-color: #D2B48C;
+    color: #8B4513; /* Cor do texto no botão */
+}
+
+.login-form input {
+    width: 200px; /* Defina a largura desejada dos campos */
+    height: 30px; /* Defina a altura desejada dos campos */
+    font-size: 14px; /* Defina o tamanho da fonte dos campos */
+    text-align: center;
+}
+
+.div-centralizada.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+img {
+    width: 12%; /* Defina a largura desejada em pixels */
+    height: auto; /* Calcula automaticamente a altura proporcional */
+}
+
+#logo {
+    position: relative;
+    z-index: 2; /* Define um valor de z-index maior para a logo */
+}
+
+.gatinho-ascii {
+    font-family: monospace;
+    white-space: pre;
+    text-align: center;
+
+}
+
+
+#gatinho {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12%; /* Ajuste a largura do gato conforme necessário */
+    height: auto; /* Calcula automaticamente a altura proporcional */
+    animation: gatinhoAnimacao 25s linear infinite;
+    z-index: 1; /* Define um valor de z-index menor para o gato */
+}
+
+@keyframes gatinhoAnimacao {
+    0% {
+        left: -100px;
+        background-image: url('C:\Users\joaoi\OneDrive\Área de Trabalho\trabalho simone\imagens\gatof1.png');
+    }
+    50% {
+        left: calc(50% - 100px);
+        background-image: url('C:\Users\joaoi\OneDrive\Área de Trabalho\trabalho simone\imagens\gatof2.png');
+    }
+    100% {
+        left: calc(100% + 100px);
+        background-image: url('C:\Users\joaoi\OneDrive\Área de Trabalho\trabalho simone\imagens\gatof1.png');
+    }
+}

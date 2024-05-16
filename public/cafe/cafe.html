@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <link rel="stylesheet" type="text/css" href="cafe.css">
+  </head>
+  <div class="chat-container">
+   <ul id="messages"></ul>
+   <form id="chat-form" class="chat-form">
+      <input id="input-message" autocomplete="off" />
+      <button>Enviar</button>
+   </form>
+   <div class="command-container">
+      <input id="command-input" type="text" placeholder="Digite um comando" autocomplete="off" />
+      <button id="logout-button">Logout</button>
+   </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="chat-client.js"></script>
+  <audio id="meow1-sound" src="../sounds/meow1.wav"></audio>
+  <audio id="meow2-sound" src="../sounds/meow2.wav"></audio>
+  <audio id="meow3-sound" src="../sounds/meow3.wav"></audio>
+  <audio id="purr-sound" src="../sounds/purr.wav"></audio>
+
+
+  <!-- Botão para abrir/fechar o container -->
+  <button id="toggle-container-button" class="open-button">TETRIS</button>
+
+  <!-- Container oculto -->
+  <div id="container" class="popup-container">
+    <iframe id="container-iframe" src="" frameborder="0"></iframe>
+    <span class="close-button" onclick="closeContainer()">Fechar</span>
+  </div>
+
+  <script>
+    const logoutButton = document.getElementById("logout-button");
+    const toggleContainerButton = document.getElementById("toggle-container-button");
+    const container = document.getElementById("container");
+    const containerIframe = document.getElementById("container-iframe");
+    const body = document.body;
+
+    logoutButton.addEventListener("click", () => {
+      // Realize as ações necessárias para destruir a sessão do usuário
+      // Redirecione o usuário para a home do site
+      window.location.href = "/";
+    });
+
+    toggleContainerButton.addEventListener("click", () => {
+      toggleContainer();
+    });
+
+    function toggleContainer() {
+      if (container.style.display === "none") {
+        container.style.display = "block";
+        body.style.overflow = "hidden"; // Trava a barra de rolagem da página
+        loadContainerContent();
+      } else {
+        container.style.display = "none";
+        containerIframe.src = ""; // Limpa o conteúdo do iframe ao fechar
+        body.style.overflow = "auto"; // Libera a barra de rolagem da página
+      }
+    }
+
+    function closeContainer() {
+      container.style.display = "none";
+      containerIframe.src = ""; // Limpa o conteúdo do iframe ao fechar
+      body.style.overflow = "auto"; // Libera a barra de rolagem da página
+    }
+
+    function loadContainerContent() {
+      containerIframe.src = "cfs/tetris.html";
+    }
+  </script>
+</body>
+</html>
